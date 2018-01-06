@@ -7,32 +7,34 @@
 
 import Foundation
 
-public struct LinkedListIndex<T>: Comparable {
+
+/// Index for linked list
+public struct LinkedListIndex<T: Comparable>: Comparable {
     
     let node: Node<T>?
     let i: Int
     
-    public static func== (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func == (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i == rhs.i
     }
     
-    public static func!= (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func != (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i != rhs.i
     }
     
-    public static func< (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func < (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i < rhs.i
     }
     
-    public static func<= (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func <= (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i <= rhs.i
     }
     
-    public static func> (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func > (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i > rhs.i
     }
     
-    public static func>= (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
+    public static func >= (lhs: LinkedListIndex, rhs: LinkedListIndex) -> Bool {
         return lhs.i >= rhs.i
     }
 }
