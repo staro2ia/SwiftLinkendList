@@ -29,7 +29,7 @@ public struct LinkedList<T: Comparable > {
     public var last: Node<T>? {
         return tail
     }
-
+    
     /// Count of the list's elements
     public var size: Int {
         var i = 0
@@ -137,17 +137,46 @@ extension LinkedList: CustomStringConvertible {
 // MARK: - extension Collection
 extension LinkedList: Collection {
     
-    public var startIndex:LinkedListIndex<T> {
-        return LinkedListIndex<T>(head, 0)
-    }
-    
-    public var endIndex: LinkedListIndex<T> {
-        return LinkedListIndex<T>(tail, size)
-    }
-    
-    
-    
+    public typealias Element = T
+    public typealias SubSequence = LinkedList<T>
+    public typealias Index = LinkedListIndex<T>
     public typealias Iterator = LinkedListIterator<T>
+    
+    public var count: Int {
+        guard var node = head else {
+            return 0
+        }
+        
+        var count = 1
+        while let next = node.next {
+            node = next
+            count += 1
+        }
+        return count
+    }
+    
+    public var startIndex: Index {
+        return LinkedListIndex<T>(node: head, i: 0)
+    }
+    
+    public var endIndex: Index {
+        return LinkedListIndex<T>(node: tail, i: size)
+    }
+    
+    public subscript(position: LinkedListIndex<T>) -> T {
+        return node(at: position.i)!.value
+    }
+    
+    public subscript(i: Int) -> T {
+        return node(at: i)!.value
+    }
+
+    public func index(after idx: LinkedListIndex<T>) -> LinkedListIndex<T> {
+        return Index(node: idx.node?.next, i: idx.i + 1)
+    }
+    
+    
+
     
     public func makeIterator() -> LinkedList.Iterator {
         return LinkedListIterator(self)
@@ -155,6 +184,9 @@ extension LinkedList: Collection {
     
     
 }
+
+
+
 
 // TODO: - Implement index model
 
